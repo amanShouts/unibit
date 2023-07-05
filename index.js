@@ -18,7 +18,7 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
-console.log("2 d array ", pairs)
+console.log("2d array -> ", pairs)
 
 let mergedArr = pairs[0]
 
@@ -52,4 +52,43 @@ for (let i = 1; i < pairs.length; i++) {
     merge(mergedArr, pairs[i])
 }
 
-console.log("after flattening ", mergedArr)
+console.log("After flattening -> ", mergedArr)
+
+let newTarget = 2 * target
+let allCombos = []
+
+findAllCombos(mergedArr, newTarget, 0, [], 0)
+
+console.log("all combos -> ", allCombos)
+
+function findAllCombos(arr, target, index, ans, sum) {
+    // either add the current alement - arr[index] or skip it 
+    if (index >= arr.length) {
+        if (sum == target) {
+            allCombos.push([...ans])
+        }
+        return;
+    }
+
+    ans.push(arr[index])
+    findAllCombos(arr, target, index + 1, ans, sum); // current skip 
+    ans.pop()
+    findAllCombos(arr, target, index + 1, ans, sum + arr[index]); // take current element 
+}
+
+// function findAllCombos(arr, target, index, ans, sum) {
+//     if (index >= arr.length) {
+//         if (sum === target) {
+//             allCombos.push(ans.slice()); // Create a new array by using slice() before pushing
+//         }
+//         return;
+//     }
+
+//     // Include current element
+//     ans.push(arr[index]);
+//     findAllCombos(arr, target, index + 1, ans, sum + arr[index]);
+//     ans.pop();
+
+//     // Skip current element
+//     findAllCombos(arr, target, index + 1, ans, sum);
+// }
